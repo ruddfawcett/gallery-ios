@@ -1,0 +1,596 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DBF70F03B2BA8852A17FEEAD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 714068E979A98E22912229D9 /* libPods.a */; };
+		F1092F111A43E02200B506BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F101A43E02200B506BB /* main.m */; };
+		F1092F141A43E02200B506BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F131A43E02200B506BB /* AppDelegate.m */; };
+		F1092F171A43E02200B506BB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F161A43E02200B506BB /* ViewController.m */; };
+		F1092F1C1A43E02200B506BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1092F1B1A43E02200B506BB /* Images.xcassets */; };
+		F1092F1F1A43E02200B506BB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1092F1D1A43E02200B506BB /* LaunchScreen.xib */; };
+		F1092F2B1A43E02300B506BB /* galleryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F2A1A43E02300B506BB /* galleryTests.m */; };
+		F1092F361A43E88B00B506BB /* GGMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F351A43E88B00B506BB /* GGMenuViewController.m */; };
+		F1092F3C1A4485FA00B506BB /* GGSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F3B1A4485FA00B506BB /* GGSlidingViewController.m */; };
+		F1092F3F1A4489B300B506BB /* GGRadioButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F3E1A4489B300B506BB /* GGRadioButtonTableViewCell.m */; };
+		F1092F441A44BB6400B506BB /* GGColorPickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F431A44BB6400B506BB /* GGColorPickerTableViewCell.m */; };
+		F1092F471A44D1EE00B506BB /* GGUIColorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F461A44D1EE00B506BB /* GGUIColorTableViewCell.m */; };
+		F170AF361A44F59F0051B5B2 /* NSKeyedUnarchiver+String.m in Sources */ = {isa = PBXBuildFile; fileRef = F170AF331A44F59F0051B5B2 /* NSKeyedUnarchiver+String.m */; };
+		F170AF371A44F59F0051B5B2 /* UIImage+String.m in Sources */ = {isa = PBXBuildFile; fileRef = F170AF351A44F59F0051B5B2 /* UIImage+String.m */; };
+		F170AF3E1A44F5F60051B5B2 /* GGIconArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = F170AF3D1A44F5F60051B5B2 /* GGIconArchive.m */; };
+		F170AF411A44F6A40051B5B2 /* GGBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F170AF401A44F6A40051B5B2 /* GGBrowserViewController.m */; };
+		F170AF471A44FBDF0051B5B2 /* GGIconCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F170AF461A44FBDF0051B5B2 /* GGIconCollectionViewCell.m */; };
+		F1B7B4241A46A7C400DDA92A /* UITabBar+GGExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F1B7B4231A46A7C400DDA92A /* UITabBar+GGExtensions.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F1092F251A43E02200B506BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1092F031A43E02200B506BB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1092F0A1A43E02200B506BB;
+			remoteInfo = gallery;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0013B46616088F060B9AB71E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		252CF8E3271DE7A730B4B0B4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		714068E979A98E22912229D9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1092F0B1A43E02200B506BB /* gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1092F0F1A43E02200B506BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1092F101A43E02200B506BB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F1092F121A43E02200B506BB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F1092F131A43E02200B506BB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F1092F151A43E02200B506BB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F1092F161A43E02200B506BB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F1092F1B1A43E02200B506BB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F1092F1E1A43E02200B506BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F1092F241A43E02200B506BB /* galleryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = galleryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1092F291A43E02200B506BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1092F2A1A43E02300B506BB /* galleryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = galleryTests.m; sourceTree = "<group>"; };
+		F1092F341A43E88A00B506BB /* GGMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GGMenuViewController.h; path = Classes/Controllers/Menu/GGMenuViewController.h; sourceTree = "<group>"; };
+		F1092F351A43E88B00B506BB /* GGMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GGMenuViewController.m; path = Classes/Controllers/Menu/GGMenuViewController.m; sourceTree = "<group>"; };
+		F1092F3A1A4485FA00B506BB /* GGSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GGSlidingViewController.h; path = Classes/Controllers/Menu/GGSlidingViewController.h; sourceTree = "<group>"; };
+		F1092F3B1A4485FA00B506BB /* GGSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GGSlidingViewController.m; path = Classes/Controllers/Menu/GGSlidingViewController.m; sourceTree = "<group>"; };
+		F1092F3D1A4489B300B506BB /* GGRadioButtonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GGRadioButtonTableViewCell.h; path = Classes/Views/Cells/GGRadioButtonTableViewCell.h; sourceTree = "<group>"; };
+		F1092F3E1A4489B300B506BB /* GGRadioButtonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GGRadioButtonTableViewCell.m; path = Classes/Views/Cells/GGRadioButtonTableViewCell.m; sourceTree = "<group>"; };
+		F1092F421A44BB6400B506BB /* GGColorPickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GGColorPickerTableViewCell.h; path = Classes/Views/Cells/GGColorPickerTableViewCell.h; sourceTree = "<group>"; };
+		F1092F431A44BB6400B506BB /* GGColorPickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GGColorPickerTableViewCell.m; path = Classes/Views/Cells/GGColorPickerTableViewCell.m; sourceTree = "<group>"; };
+		F1092F451A44D1EE00B506BB /* GGUIColorTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GGUIColorTableViewCell.h; path = Classes/Views/Cells/GGUIColorTableViewCell.h; sourceTree = "<group>"; };
+		F1092F461A44D1EE00B506BB /* GGUIColorTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GGUIColorTableViewCell.m; path = Classes/Views/Cells/GGUIColorTableViewCell.m; sourceTree = "<group>"; };
+		F170AF321A44F59F0051B5B2 /* NSKeyedUnarchiver+String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSKeyedUnarchiver+String.h"; sourceTree = "<group>"; };
+		F170AF331A44F59F0051B5B2 /* NSKeyedUnarchiver+String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSKeyedUnarchiver+String.m"; sourceTree = "<group>"; };
+		F170AF341A44F59F0051B5B2 /* UIImage+String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+String.h"; sourceTree = "<group>"; };
+		F170AF351A44F59F0051B5B2 /* UIImage+String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+String.m"; sourceTree = "<group>"; };
+		F170AF3C1A44F5F60051B5B2 /* GGIconArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGIconArchive.h; sourceTree = "<group>"; };
+		F170AF3D1A44F5F60051B5B2 /* GGIconArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGIconArchive.m; sourceTree = "<group>"; };
+		F170AF3F1A44F6A40051B5B2 /* GGBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GGBrowserViewController.h; path = Classes/Controllers/GGBrowserViewController.h; sourceTree = "<group>"; };
+		F170AF401A44F6A40051B5B2 /* GGBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GGBrowserViewController.m; path = Classes/Controllers/GGBrowserViewController.m; sourceTree = "<group>"; };
+		F170AF451A44FBDF0051B5B2 /* GGIconCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GGIconCollectionViewCell.h; path = Classes/Controllers/GGIconCollectionViewCell.h; sourceTree = "<group>"; };
+		F170AF461A44FBDF0051B5B2 /* GGIconCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GGIconCollectionViewCell.m; path = Classes/Controllers/GGIconCollectionViewCell.m; sourceTree = "<group>"; };
+		F1B7B4221A46A7C400DDA92A /* UITabBar+GGExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITabBar+GGExtensions.h"; path = "Classes/UITabBar+GGExtensions.h"; sourceTree = "<group>"; };
+		F1B7B4231A46A7C400DDA92A /* UITabBar+GGExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITabBar+GGExtensions.m"; path = "Classes/UITabBar+GGExtensions.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F1092F081A43E02200B506BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBF70F03B2BA8852A17FEEAD /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1092F211A43E02200B506BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CE7D22A9A1406E02B224D2C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				714068E979A98E22912229D9 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D95283696DC8AC46599A1359 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				252CF8E3271DE7A730B4B0B4 /* Pods.debug.xcconfig */,
+				0013B46616088F060B9AB71E /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F1092F021A43E02200B506BB = {
+			isa = PBXGroup;
+			children = (
+				F1092F0D1A43E02200B506BB /* gallery */,
+				F1092F271A43E02200B506BB /* galleryTests */,
+				F1092F0C1A43E02200B506BB /* Products */,
+				D95283696DC8AC46599A1359 /* Pods */,
+				CE7D22A9A1406E02B224D2C2 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F1092F0C1A43E02200B506BB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1092F0B1A43E02200B506BB /* gallery.app */,
+				F1092F241A43E02200B506BB /* galleryTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1092F0D1A43E02200B506BB /* gallery */ = {
+			isa = PBXGroup;
+			children = (
+				F170AF3C1A44F5F60051B5B2 /* GGIconArchive.h */,
+				F170AF3D1A44F5F60051B5B2 /* GGIconArchive.m */,
+				F1092F121A43E02200B506BB /* AppDelegate.h */,
+				F1092F131A43E02200B506BB /* AppDelegate.m */,
+				F1092F371A43E88E00B506BB /* Classes */,
+				F1092F151A43E02200B506BB /* ViewController.h */,
+				F1092F161A43E02200B506BB /* ViewController.m */,
+				F1092F1B1A43E02200B506BB /* Images.xcassets */,
+				F1092F1D1A43E02200B506BB /* LaunchScreen.xib */,
+				F1092F0E1A43E02200B506BB /* Supporting Files */,
+			);
+			path = gallery;
+			sourceTree = "<group>";
+		};
+		F1092F0E1A43E02200B506BB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F1092F0F1A43E02200B506BB /* Info.plist */,
+				F1092F101A43E02200B506BB /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F1092F271A43E02200B506BB /* galleryTests */ = {
+			isa = PBXGroup;
+			children = (
+				F1092F2A1A43E02300B506BB /* galleryTests.m */,
+				F1092F281A43E02200B506BB /* Supporting Files */,
+			);
+			path = galleryTests;
+			sourceTree = "<group>";
+		};
+		F1092F281A43E02200B506BB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F1092F291A43E02200B506BB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F1092F371A43E88E00B506BB /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F170AF381A44F5A40051B5B2 /* Categories */,
+				F1092F401A4489B900B506BB /* Views */,
+				F1092F381A43E89300B506BB /* Controllers */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		F1092F381A43E89300B506BB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F170AF3F1A44F6A40051B5B2 /* GGBrowserViewController.h */,
+				F170AF401A44F6A40051B5B2 /* GGBrowserViewController.m */,
+				F170AF451A44FBDF0051B5B2 /* GGIconCollectionViewCell.h */,
+				F170AF461A44FBDF0051B5B2 /* GGIconCollectionViewCell.m */,
+				F1092F391A43E89900B506BB /* Menu */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		F1092F391A43E89900B506BB /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				F1092F3A1A4485FA00B506BB /* GGSlidingViewController.h */,
+				F1092F3B1A4485FA00B506BB /* GGSlidingViewController.m */,
+				F1092F341A43E88A00B506BB /* GGMenuViewController.h */,
+				F1092F351A43E88B00B506BB /* GGMenuViewController.m */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		F1092F401A4489B900B506BB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F1092F411A4489C000B506BB /* Cells */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		F1092F411A4489C000B506BB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F1092F3D1A4489B300B506BB /* GGRadioButtonTableViewCell.h */,
+				F1092F3E1A4489B300B506BB /* GGRadioButtonTableViewCell.m */,
+				F1092F421A44BB6400B506BB /* GGColorPickerTableViewCell.h */,
+				F1092F431A44BB6400B506BB /* GGColorPickerTableViewCell.m */,
+				F1092F451A44D1EE00B506BB /* GGUIColorTableViewCell.h */,
+				F1092F461A44D1EE00B506BB /* GGUIColorTableViewCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		F170AF381A44F5A40051B5B2 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				F170AF321A44F59F0051B5B2 /* NSKeyedUnarchiver+String.h */,
+				F170AF331A44F59F0051B5B2 /* NSKeyedUnarchiver+String.m */,
+				F170AF341A44F59F0051B5B2 /* UIImage+String.h */,
+				F170AF351A44F59F0051B5B2 /* UIImage+String.m */,
+				F1B7B4221A46A7C400DDA92A /* UITabBar+GGExtensions.h */,
+				F1B7B4231A46A7C400DDA92A /* UITabBar+GGExtensions.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F1092F0A1A43E02200B506BB /* gallery */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1092F2E1A43E02300B506BB /* Build configuration list for PBXNativeTarget "gallery" */;
+			buildPhases = (
+				A86735CD6685BE09CD94790F /* Check Pods Manifest.lock */,
+				F1092F071A43E02200B506BB /* Sources */,
+				F1092F081A43E02200B506BB /* Frameworks */,
+				F1092F091A43E02200B506BB /* Resources */,
+				F08BD0F9F4CC5CE29C541CF9 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = gallery;
+			productName = gallery;
+			productReference = F1092F0B1A43E02200B506BB /* gallery.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F1092F231A43E02200B506BB /* galleryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1092F311A43E02300B506BB /* Build configuration list for PBXNativeTarget "galleryTests" */;
+			buildPhases = (
+				F1092F201A43E02200B506BB /* Sources */,
+				F1092F211A43E02200B506BB /* Frameworks */,
+				F1092F221A43E02200B506BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1092F261A43E02200B506BB /* PBXTargetDependency */,
+			);
+			name = galleryTests;
+			productName = galleryTests;
+			productReference = F1092F241A43E02200B506BB /* galleryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F1092F031A43E02200B506BB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = GG;
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Glyphish;
+				TargetAttributes = {
+					F1092F0A1A43E02200B506BB = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = K99NAT9AQ8;
+					};
+					F1092F231A43E02200B506BB = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = F1092F0A1A43E02200B506BB;
+					};
+				};
+			};
+			buildConfigurationList = F1092F061A43E02200B506BB /* Build configuration list for PBXProject "gallery" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F1092F021A43E02200B506BB;
+			productRefGroup = F1092F0C1A43E02200B506BB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F1092F0A1A43E02200B506BB /* gallery */,
+				F1092F231A43E02200B506BB /* galleryTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F1092F091A43E02200B506BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1092F1F1A43E02200B506BB /* LaunchScreen.xib in Resources */,
+				F1092F1C1A43E02200B506BB /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1092F221A43E02200B506BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A86735CD6685BE09CD94790F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F08BD0F9F4CC5CE29C541CF9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F1092F071A43E02200B506BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1092F441A44BB6400B506BB /* GGColorPickerTableViewCell.m in Sources */,
+				F1092F471A44D1EE00B506BB /* GGUIColorTableViewCell.m in Sources */,
+				F1092F3C1A4485FA00B506BB /* GGSlidingViewController.m in Sources */,
+				F170AF361A44F59F0051B5B2 /* NSKeyedUnarchiver+String.m in Sources */,
+				F170AF371A44F59F0051B5B2 /* UIImage+String.m in Sources */,
+				F1B7B4241A46A7C400DDA92A /* UITabBar+GGExtensions.m in Sources */,
+				F170AF3E1A44F5F60051B5B2 /* GGIconArchive.m in Sources */,
+				F1092F171A43E02200B506BB /* ViewController.m in Sources */,
+				F1092F141A43E02200B506BB /* AppDelegate.m in Sources */,
+				F170AF471A44FBDF0051B5B2 /* GGIconCollectionViewCell.m in Sources */,
+				F1092F3F1A4489B300B506BB /* GGRadioButtonTableViewCell.m in Sources */,
+				F170AF411A44F6A40051B5B2 /* GGBrowserViewController.m in Sources */,
+				F1092F111A43E02200B506BB /* main.m in Sources */,
+				F1092F361A43E88B00B506BB /* GGMenuViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1092F201A43E02200B506BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1092F2B1A43E02300B506BB /* galleryTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F1092F261A43E02200B506BB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1092F0A1A43E02200B506BB /* gallery */;
+			targetProxy = F1092F251A43E02200B506BB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F1092F1D1A43E02200B506BB /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1092F1E1A43E02200B506BB /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F1092F2C1A43E02300B506BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F1092F2D1A43E02300B506BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F1092F2F1A43E02300B506BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 252CF8E3271DE7A730B4B0B4 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = gallery/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F1092F301A43E02300B506BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0013B46616088F060B9AB71E /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = gallery/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F1092F321A43E02300B506BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = galleryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gallery.app/gallery";
+			};
+			name = Debug;
+		};
+		F1092F331A43E02300B506BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = galleryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gallery.app/gallery";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F1092F061A43E02200B506BB /* Build configuration list for PBXProject "gallery" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1092F2C1A43E02300B506BB /* Debug */,
+				F1092F2D1A43E02300B506BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1092F2E1A43E02300B506BB /* Build configuration list for PBXNativeTarget "gallery" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1092F2F1A43E02300B506BB /* Debug */,
+				F1092F301A43E02300B506BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1092F311A43E02300B506BB /* Build configuration list for PBXNativeTarget "galleryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1092F321A43E02300B506BB /* Debug */,
+				F1092F331A43E02300B506BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F1092F031A43E02200B506BB /* Project object */;
+}
