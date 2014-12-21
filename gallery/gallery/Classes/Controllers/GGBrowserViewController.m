@@ -72,6 +72,7 @@ static NSString * const reuseIdentifier = @"IconCell";
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
     longPress.minimumPressDuration = 0.3;
+    longPress.numberOfTouchesRequired = 1;
     [self.collectionView addGestureRecognizer:longPress];
     
     [self.view addSubview:self.collectionView];
@@ -120,17 +121,13 @@ static NSString * const reuseIdentifier = @"IconCell";
     if (self.tabBar.items.count > 0) {
         self.beginningItem = [self.tabBar itemAtPoint:location];
         UITabBarItem *tabBarItem = self.tabBar.items[self.beginningItem];
-        [self setUpIconOverlay:tabBarItem.image center:location];
+        [self setUpIconOverlay:tabBarItem.image tabBar:YES center:location];
     }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint location = [touch locationInView:self.view];
-    
-    if (![touch.view isEqual:self.tabBarOverlay] || !CGRectContainsPoint(self.tabBarOverlay.frame, location)) {
-        return;
-    }
     
     [self moveIconOverlay:location];
 }
@@ -145,12 +142,14 @@ static NSString * const reuseIdentifier = @"IconCell";
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint location = [touch locationInView:self.view];
     
-    if (![touch.view isEqual:self.tabBarOverlay] || self.tabBar.items.count == 0) {
+    if (self.tabBar.items.count == 0) {
         return;
     }
     
     if (!CGRectContainsPoint(self.tabBarOverlay.frame, location)) {
         NSMutableArray *items = [self.tabBar.items mutableCopy];
+        
+        [items removeObjectAtIndex:self.beginningItem];
         
         [self.tabBar setItems:items animated:YES];
         
@@ -193,7 +192,7 @@ static NSString * const reuseIdentifier = @"IconCell";
     
     GGIconCollectionViewCell *cell = (GGIconCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:selectedItem];
     
-    [self setUpIconOverlay:cell.imageView.image center:[gesture locationInView:self.collectionViewOverlay]];
+    [self setUpIconOverlay:cell.imageView.image tabBar:NO center:[gesture locationInView:self.collectionViewOverlay]];
 }
 
 - (void)longPressEnded:(UILongPressGestureRecognizer *)gesture {
@@ -245,14 +244,23 @@ static NSString * const reuseIdentifier = @"IconCell";
 #pragma mark - Icon Overlay Management
 
 - (void)moveIconOverlay:(CGPoint)newCenter {
-    [self setUpIconOverlay:nil center:newCenter];
+    if (self.iconOverlay) {
+        [self setUpIconOverlay:nil tabBar:NO center:newCenter];
+    }
 }
 
-- (void)setUpIconOverlay:(UIImage *)image center:(CGPoint)center {
+- (void)setUpIconOverlay:(UIImage *)image tabBar:(BOOL)tabBar center:(CGPoint)center {
     if (!self.iconOverlay) {
         self.iconOverlay = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
         self.iconOverlay.contentMode = UIViewContentModeScaleAspectFit;
-        self.iconOverlay.image = image;
+        
+        UIColor *iconColor;
+        if (!tabBar) {
+            iconColor = self.selectedColor ? self.selectedColor : GG_DEFAULT_COLOR;
+        }
+        else iconColor = self.view.tintColor;
+        
+        self.iconOverlay.image = [UIImage maskedImage:image color:iconColor];
     }
 
     self.iconOverlay.center = center;
