@@ -8,7 +8,13 @@
 
 #import "GGMenuViewController.h"
 
-@interface GGMenuViewController ()
+#import "AppDelegate.h"
+
+#import "GGColorPickerTableViewCell.h"
+#import "GGUIColorTableViewCell.h"
+#import "GGRadioButtonTableViewCell.h"
+
+@interface GGMenuViewController () <GGColorPickerCellDelegate>
 
 @property (strong, nonatomic) NSArray *contents;
 @property (strong, nonatomic) UITableView *tableView;

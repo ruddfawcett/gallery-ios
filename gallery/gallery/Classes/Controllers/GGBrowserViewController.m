@@ -8,7 +8,13 @@
 
 #import "GGBrowserViewController.h"
 
-@interface GGBrowserViewController ()
+#import "GGIconArchive.h"
+
+#import "GGIconCollectionViewCell.h"
+#import "GGMenuViewController.h"
+#import "GGColorPickerTableViewCell.h"
+
+@interface GGBrowserViewController () <GGSetSelectionDelegate, GGColorPickerDelegate>
 
 @property (nonatomic) NSInteger selectedSet;
 @property (strong, nonatomic) UIColor *selectedColor;
@@ -24,6 +30,8 @@
 @property (nonatomic) NSInteger beginningItem;
 @property (nonatomic) NSInteger endItem;
 
+@property (nonatomic) BOOL itemsAnimated;
+
 @end
 
 @implementation GGBrowserViewController
@@ -34,6 +42,8 @@ static NSString * const reuseIdentifier = @"IconCell";
     if (self = [super init]) {
         [GGMenuViewController sharedMenu].glyphishSetDelegate = self;
         [GGMenuViewController sharedMenu].glyphishColorDelegate = self;
+        
+        self.itemsAnimated = YES;
     }
     
     return self;
@@ -57,7 +67,7 @@ static NSString * const reuseIdentifier = @"IconCell";
 
 - (void)initializeCollectionView {
     UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
-    flowLayout.itemSize = CGSizeMake(50, 50);
+    flowLayout.itemSize = CGSizeMake(self.view.bounds.size.width/7, self.view.bounds.size.width/7);
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     flowLayout.minimumInteritemSpacing = 0;
     flowLayout.minimumLineSpacing = 0;
@@ -71,7 +81,7 @@ static NSString * const reuseIdentifier = @"IconCell";
     self.collectionView.dataSource = self;
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
-    longPress.minimumPressDuration = 0.3;
+    longPress.minimumPressDuration = 0.15;
     longPress.numberOfTouchesRequired = 1;
     [self.collectionView addGestureRecognizer:longPress];
     
@@ -151,7 +161,7 @@ static NSString * const reuseIdentifier = @"IconCell";
         
         [items removeObjectAtIndex:self.beginningItem];
         
-        [self.tabBar setItems:items animated:YES];
+        [self.tabBar setItems:items animated:self.itemsAnimated];
         
         return;
     }
@@ -165,7 +175,7 @@ static NSString * const reuseIdentifier = @"IconCell";
             [items exchangeObjectAtIndex:self.beginningItem withObjectAtIndex:self.endItem];
         }
             
-        [self.tabBar setItems:items animated:YES];
+        [self.tabBar setItems:items animated:self.itemsAnimated];
     }
 }
 
@@ -192,7 +202,9 @@ static NSString * const reuseIdentifier = @"IconCell";
     
     GGIconCollectionViewCell *cell = (GGIconCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:selectedItem];
     
-    [self setUpIconOverlay:cell.imageView.image tabBar:NO center:[gesture locationInView:self.collectionViewOverlay]];
+    if (cell.imageView.image != nil) {
+        [self setUpIconOverlay:cell.imageView.image tabBar:NO center:[gesture locationInView:self.collectionViewOverlay]];
+    }
 }
 
 - (void)longPressEnded:(UILongPressGestureRecognizer *)gesture {
@@ -220,7 +232,7 @@ static NSString * const reuseIdentifier = @"IconCell";
         [items replaceObjectAtIndex:self.endItem withObject:item];
     }
     
-    [self.tabBar setItems:items animated:YES];
+    [self.tabBar setItems:items animated:self.itemsAnimated];
     
     [self removeOverlay];
 }

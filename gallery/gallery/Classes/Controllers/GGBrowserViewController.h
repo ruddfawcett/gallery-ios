@@ -8,18 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-#import "GGIconArchive.h"
+@class GGIconArchive;
+
+@class GGIconCollectionViewCell;
+@class GGMenuViewController;
+@class GGColorPickerTableViewCell;
 
 #import "NSKeyedUnarchiver+String.h"
 #import "UIImage+String.h"
 #import "UITabBar+GGExtensions.h"
 
-#import "GGIconCollectionViewCell.h"
-#import "GGMenuViewController.h"
-#import "GGColorPickerTableViewCell.h"
-
 #define GG_DEFAULT_COLOR [UIColor colorWithRed:0.000 green:0.655 blue:1.000 alpha:1.00]
 
-@interface GGBrowserViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, GGSetSelectionDelegate, GGColorPickerDelegate>
+@interface GGBrowserViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @end

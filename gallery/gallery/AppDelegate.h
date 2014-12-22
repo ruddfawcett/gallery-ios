@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import <ECSlidingViewController/ECSlidingViewController.h>
 
-#import "GGBrowserViewController.h"
-
+@class GGBrowserViewController;
 @class GGMenuViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (nonatomic, strong) ECSlidingViewController *slidingViewController;
 
 @property (strong, nonatomic) UIWindow *window;
 

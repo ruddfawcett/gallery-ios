@@ -8,17 +8,20 @@
 
 #import "AppDelegate.h"
 
+#import "GGBrowserViewController.h"
 #import "GGMenuViewController.h"
 
 @interface AppDelegate ()
 
-@property (nonatomic, strong) ECSlidingViewController *slidingViewController;
+@property (strong, nonatomic) UINavigationController *navigationController;
+
 @property (strong, nonatomic) UIView *statusBarUnderlay;
+
+@property (strong, nonatomic) UIView *overlay;
 
 @end
 
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -38,12 +41,12 @@
     topViewController.view.backgroundColor = [UIColor whiteColor];
     
     UIGestureRecognizer *resetTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resetTopViewAnimated)];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:topViewController];
-    [navigationController.view addGestureRecognizer:resetTapGesture];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:topViewController];
+    [self.navigationController.view addGestureRecognizer:resetTapGesture];
     
-    self.slidingViewController = [ECSlidingViewController slidingWithTopViewController:navigationController];
-    self.slidingViewController.underLeftViewController  = menuController;
-    self.slidingViewController.anchorRightPeekAmount  = 45.0;
+    self.slidingViewController = [ECSlidingViewController slidingWithTopViewController:self.navigationController];
+    self.slidingViewController.underLeftViewController = menuController;
+    self.slidingViewController.anchorRightPeekAmount = 45.0;
     
     self.window.tintColor = [UIColor colorWithRed:0.424 green:0.471 blue:0.502 alpha:1.00];
     self.window.rootViewController = self.slidingViewController;
@@ -58,6 +61,10 @@
         [self.slidingViewController.topViewController.view addSubview:self.statusBarUnderlay];
         
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+        
+        self.overlay = [[UIView alloc] initWithFrame:self.navigationController.view.frame];
+        [self.navigationController.view addSubview:self.overlay];
+        
         [self.slidingViewController anchorTopViewToRightAnimated:YES onComplete:nil];
     } else {
         [self resetTopViewAnimated];
@@ -69,6 +76,7 @@
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
         [self.statusBarUnderlay performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
         [self.slidingViewController resetTopViewAnimated:YES onComplete:nil];
+        [self.overlay removeFromSuperview];
     }
 }
 

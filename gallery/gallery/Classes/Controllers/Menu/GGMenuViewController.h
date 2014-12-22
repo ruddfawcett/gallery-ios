@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Color-Picker-for-iOS/HRColorPickerView.h>
 
-#import "GGColorPickerTableViewCell.h"
-#import "GGUIColorTableViewCell.h"
-#import "GGRadioButtonTableViewCell.h"
+@class AppDelegate;
+
+@class GGColorPickerTableViewCell;
+@class GGUIColorTableViewCell;
+@class GGRadioButtonTableViewCell;
 
 #define GGSetCount 6
 
@@ -38,7 +39,7 @@ typedef NS_ENUM(NSUInteger, GGMenuSections) {
 
 @end
 
-@interface GGMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, GGColorPickerCellDelegate>
+@interface GGMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 + (instancetype)sharedMenu;
 
