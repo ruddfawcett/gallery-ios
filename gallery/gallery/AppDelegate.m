@@ -46,7 +46,8 @@
     
     self.slidingViewController = [ECSlidingViewController slidingWithTopViewController:self.navigationController];
     self.slidingViewController.underLeftViewController = menuController;
-    self.slidingViewController.anchorRightPeekAmount = 45.0;
+    float width = self.window.bounds.size.width > 414 ? self.window.bounds.size.width*(.140625*4) : self.window.bounds.size.width*(.140625*2);
+    self.slidingViewController.anchorRightPeekAmount = width;
     
     self.window.tintColor = [UIColor colorWithRed:0.424 green:0.471 blue:0.502 alpha:1.00];
     self.window.rootViewController = self.slidingViewController;

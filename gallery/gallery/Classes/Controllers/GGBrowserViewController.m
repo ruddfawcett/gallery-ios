@@ -67,21 +67,24 @@ static NSString * const reuseIdentifier = @"IconCell";
 
 - (void)initializeCollectionView {
     UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
-    flowLayout.itemSize = CGSizeMake(self.view.bounds.size.width/7, self.view.bounds.size.width/7);
+    
+    int row = self.view.bounds.size.width > 414 ? 10 : 6;
+    
+    flowLayout.itemSize = CGSizeMake(self.view.bounds.size.width/row, self.view.bounds.size.width/row);
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     flowLayout.minimumInteritemSpacing = 0;
     flowLayout.minimumLineSpacing = 0;
     
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-49.5) collectionViewLayout:flowLayout];
     self.collectionView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height+self.tabBar.frame.size.height+20, 0, 0, 0);
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.scrollsToTop = YES;
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
-    longPress.minimumPressDuration = 0.15;
+    longPress.minimumPressDuration = 0.3;
     longPress.numberOfTouchesRequired = 1;
     [self.collectionView addGestureRecognizer:longPress];
     
@@ -110,11 +113,11 @@ static NSString * const reuseIdentifier = @"IconCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GGIconCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-
+    
     UIImage *icon = [UIImage imageFromArchivedString:[self currentSet][indexPath.row][@"archive"]];
     
     cell.imageView.image = [UIImage maskedImage:icon color:(self.selectedColor ? self.selectedColor : GG_DEFAULT_COLOR)];
-        
+    
     return cell;
 }
 
@@ -240,9 +243,8 @@ static NSString * const reuseIdentifier = @"IconCell";
 #pragma mark - Collection View Overlay Management
 
 - (void)addOverlay {
-    self.collectionViewOverlay = [[UIView alloc] initWithFrame:self.collectionView.frame];
-    
-    [self.view insertSubview:self.collectionViewOverlay aboveSubview:self.collectionView];
+    self.collectionViewOverlay = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.navigationController.view addSubview:self.collectionViewOverlay];
 }
 
 - (void)removeOverlay {
@@ -262,22 +264,34 @@ static NSString * const reuseIdentifier = @"IconCell";
 }
 
 - (void)setUpIconOverlay:(UIImage *)image tabBar:(BOOL)tabBar center:(CGPoint)center {
+    UIColor *iconColor;
+    if (!tabBar) {
+        iconColor = self.selectedColor ? self.selectedColor : GG_DEFAULT_COLOR;
+    }
+    else iconColor = self.view.tintColor;
+    
     if (!self.iconOverlay) {
         self.iconOverlay = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
         self.iconOverlay.contentMode = UIViewContentModeScaleAspectFit;
-        
-        UIColor *iconColor;
-        if (!tabBar) {
-            iconColor = self.selectedColor ? self.selectedColor : GG_DEFAULT_COLOR;
-        }
-        else iconColor = self.view.tintColor;
+        self.iconOverlay.alpha = 0;
         
         self.iconOverlay.image = [UIImage maskedImage:image color:iconColor];
+        
+        [UIView animateWithDuration:1 animations:^{
+            self.iconOverlay.alpha = 1;
+        }];
     }
+    
+//    if (CGRectContainsPoint(self.tabBar.frame, center)) {
+//        self.iconOverlay.image = [UIImage maskedImage:self.iconOverlay.image color:self.view.tintColor];
+//    }
+//    else {
+//        self.iconOverlay.image = [UIImage maskedImage:self.iconOverlay.image color:(self.selectedColor ? self.selectedColor : GG_DEFAULT_COLOR)];
+//    }
 
     self.iconOverlay.center = center;
     
-    [self.view addSubview:self.iconOverlay];
+    [self.navigationController.view addSubview:self.iconOverlay];
 }
 
 #pragma mark - Delegates

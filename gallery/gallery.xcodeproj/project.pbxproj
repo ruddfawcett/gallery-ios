@@ -15,7 +15,6 @@
 		F1092F1F1A43E02200B506BB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1092F1D1A43E02200B506BB /* LaunchScreen.xib */; };
 		F1092F2B1A43E02300B506BB /* galleryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F2A1A43E02300B506BB /* galleryTests.m */; };
 		F1092F361A43E88B00B506BB /* GGMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F351A43E88B00B506BB /* GGMenuViewController.m */; };
-		F1092F3C1A4485FA00B506BB /* GGSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F3B1A4485FA00B506BB /* GGSlidingViewController.m */; };
 		F1092F3F1A4489B300B506BB /* GGRadioButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F3E1A4489B300B506BB /* GGRadioButtonTableViewCell.m */; };
 		F1092F441A44BB6400B506BB /* GGColorPickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F431A44BB6400B506BB /* GGColorPickerTableViewCell.m */; };
 		F1092F471A44D1EE00B506BB /* GGUIColorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F461A44D1EE00B506BB /* GGUIColorTableViewCell.m */; };
@@ -55,8 +54,6 @@
 		F1092F2A1A43E02300B506BB /* galleryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = galleryTests.m; sourceTree = "<group>"; };
 		F1092F341A43E88A00B506BB /* GGMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GGMenuViewController.h; path = Classes/Controllers/Menu/GGMenuViewController.h; sourceTree = "<group>"; };
 		F1092F351A43E88B00B506BB /* GGMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GGMenuViewController.m; path = Classes/Controllers/Menu/GGMenuViewController.m; sourceTree = "<group>"; };
-		F1092F3A1A4485FA00B506BB /* GGSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GGSlidingViewController.h; path = Classes/Controllers/Menu/GGSlidingViewController.h; sourceTree = "<group>"; };
-		F1092F3B1A4485FA00B506BB /* GGSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GGSlidingViewController.m; path = Classes/Controllers/Menu/GGSlidingViewController.m; sourceTree = "<group>"; };
 		F1092F3D1A4489B300B506BB /* GGRadioButtonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GGRadioButtonTableViewCell.h; path = Classes/Views/Cells/GGRadioButtonTableViewCell.h; sourceTree = "<group>"; };
 		F1092F3E1A4489B300B506BB /* GGRadioButtonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GGRadioButtonTableViewCell.m; path = Classes/Views/Cells/GGRadioButtonTableViewCell.m; sourceTree = "<group>"; };
 		F1092F421A44BB6400B506BB /* GGColorPickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GGColorPickerTableViewCell.h; path = Classes/Views/Cells/GGColorPickerTableViewCell.h; sourceTree = "<group>"; };
@@ -201,8 +198,6 @@
 		F1092F391A43E89900B506BB /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				F1092F3A1A4485FA00B506BB /* GGSlidingViewController.h */,
-				F1092F3B1A4485FA00B506BB /* GGSlidingViewController.m */,
 				F1092F341A43E88A00B506BB /* GGMenuViewController.h */,
 				F1092F351A43E88B00B506BB /* GGMenuViewController.m */,
 			);
@@ -381,7 +376,6 @@
 			files = (
 				F1092F441A44BB6400B506BB /* GGColorPickerTableViewCell.m in Sources */,
 				F1092F471A44D1EE00B506BB /* GGUIColorTableViewCell.m in Sources */,
-				F1092F3C1A4485FA00B506BB /* GGSlidingViewController.m in Sources */,
 				F170AF361A44F59F0051B5B2 /* NSKeyedUnarchiver+String.m in Sources */,
 				F170AF371A44F59F0051B5B2 /* UIImage+String.m in Sources */,
 				F1B7B4241A46A7C400DDA92A /* UITabBar+GGExtensions.m in Sources */,
@@ -510,8 +504,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = gallery/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -521,8 +517,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = gallery/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

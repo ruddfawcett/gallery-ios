@@ -63,7 +63,9 @@
 }
 
 - (void)setUpTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 70, self.view.bounds.size.width-45, self.view.bounds.size.height-70) style:UITableViewStylePlain];
+    float width = self.view.bounds.size.width > 414 ? self.view.bounds.size.width-(self.view.bounds.size.width*(.140625*4)) : self.view.bounds.size.width-(self.view.bounds.size.width*(.140625*2));
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 70, width, self.view.bounds.size.height-70) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -78,7 +80,8 @@
 }
 
 - (UIView *)tableHeaderView {
-    UIView *background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-45, 70)];
+    float width = self.view.bounds.size.width > 414 ? self.view.bounds.size.width-(self.view.bounds.size.width*(.140625*4)) : self.view.bounds.size.width-(self.view.bounds.size.width*(.140625*2));
+    UIView *background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 70)];
     background.backgroundColor = [UIColor colorWithRed:0.161 green:0.180 blue:0.200 alpha:1.00];
     
     UIView *statusBarUnderlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, background.bounds.size.width, 25)];
@@ -96,7 +99,8 @@
 }
 
 - (UIView *)tableFooterView {
-    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-45, 100)];
+    float width = self.view.bounds.size.width > 414 ? self.view.bounds.size.width-(self.view.bounds.size.width*(.140625*4)) : self.view.bounds.size.width-(self.view.bounds.size.width*(.140625*2));
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 100)];
     
     NSInteger offset = ((GGSectionCount * 48) + 48 * GGSetCount) > self.view.bounds.size.height ?  100 : self.view.bounds.size.height - ((GGSectionCount * 48) + 48 * GGSetCount);
     
@@ -182,20 +186,11 @@
     else if (indexPath.section == GGMenuSectionBar) {
         GGRadioButtonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Radio"];
         cell = [GGRadioButtonTableViewCell cellWithReuseIdentifier:@"Radio"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.text = self.contents[indexPath.section][indexPath.row];
         
-        if (self.selectedBar) {
-            if (self.selectedBar == indexPath) {    
-                [cell setOn:YES color:[UIColor colorWithRed:0.929 green:0.286 blue:0.349 alpha:1.00]];
-            }
-            else {
-                [cell setOn:NO color:nil];
-            }
-        }
-        else {
-            if (indexPath.row == 0) {
-                [cell setOn:YES color:[UIColor colorWithRed:0.929 green:0.286 blue:0.349 alpha:1.00]];
-            }
+        if (indexPath.row == 0) {
+            [cell setOn:YES color:[UIColor colorWithRed:0.929 green:0.286 blue:0.349 alpha:1.00]];
         }
         
         return cell;
@@ -203,20 +198,11 @@
     else if (indexPath.section == GGMenuSectionSets) {
         GGRadioButtonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Radio"];
         cell = [GGRadioButtonTableViewCell cellWithReuseIdentifier:@"Radio"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.text = [NSString stringWithFormat:self.contents[indexPath.section][0], GGSetCount+2-indexPath.row];
         
-        if (self.selectedSet) {
-            if (self.selectedSet == indexPath) {
-                [cell setOn:YES color:[UIColor colorWithRed:0.169 green:0.867 blue:0.725 alpha:1.00]];
-            }
-            else {
-                [cell setOn:NO color:nil];
-            }
-        }
-        else {
-            if (indexPath.row == 0) {
-                [cell setOn:YES color:[UIColor colorWithRed:0.169 green:0.867 blue:0.725 alpha:1.00]];
-            }
+        if (indexPath.row == 0) {
+            [cell setOn:YES color:[UIColor colorWithRed:0.169 green:0.867 blue:0.725 alpha:1.00]];
         }
         
         return cell;
@@ -229,11 +215,59 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    GGRadioButtonTableViewCell *cell = (GGRadioButtonTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    
     if (indexPath.section == GGMenuSectionBar) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+        
+        if (self.selectedBar) {
+            if (self.selectedBar == indexPath) {
+                return;
+            }
+            else {
+                GGRadioButtonTableViewCell *selectedCell = (GGRadioButtonTableViewCell *)[self.tableView cellForRowAtIndexPath:self.selectedBar];
+                [selectedCell setOn:NO color:nil];
+                [cell setOn:YES color:[UIColor colorWithRed:0.929 green:0.286 blue:0.349 alpha:1.00]];
+            }
+        }
+        else {
+            if (indexPath.row == 0) {
+                return;
+            }
+            else {
+                GGRadioButtonTableViewCell *selectedCell = (GGRadioButtonTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:GGMenuSectionBar]];
+                [selectedCell setOn:NO color:nil];
+                [cell setOn:YES color:[UIColor colorWithRed:0.929 green:0.286 blue:0.349 alpha:1.00]];
+            }
+        }
+        
         self.selectedBar = indexPath;
-        [self.tableView reloadData];
     }
     if (indexPath.section == GGMenuSectionSets) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+        
+        if (self.selectedSet) {
+            if (self.selectedSet == indexPath) {
+                return;
+            }
+            else {
+                GGRadioButtonTableViewCell *selectedCell = (GGRadioButtonTableViewCell *)[self.tableView cellForRowAtIndexPath:self.selectedSet];
+                [selectedCell setOn:NO color:nil];
+                [cell setOn:YES color:[UIColor colorWithRed:0.169 green:0.867 blue:0.725 alpha:1.00]];
+            }
+        }
+        else {
+            if (indexPath.row == 0) {
+                return;
+            }
+            else {
+                GGRadioButtonTableViewCell *selectedCell = (GGRadioButtonTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:GGMenuSectionSets]];
+                [selectedCell setOn:NO color:nil];
+                
+                [cell setOn:YES color:[UIColor colorWithRed:0.169 green:0.867 blue:0.725 alpha:1.00]];
+            }
+        }
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             if (self.glyphishSetDelegate && [self.glyphishSetDelegate respondsToSelector:@selector(didSelectSet:)]) {
                 [self.glyphishSetDelegate didSelectSet:GGSetCount+2-indexPath.row];
@@ -241,7 +275,6 @@
         });
         
         self.selectedSet = indexPath;
-        [self.tableView reloadData];
     }
 }
 
