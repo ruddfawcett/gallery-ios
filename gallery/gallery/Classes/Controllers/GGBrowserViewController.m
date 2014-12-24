@@ -30,6 +30,8 @@
 @property (nonatomic) NSInteger beginningItem;
 @property (nonatomic) NSInteger endItem;
 
+@property (strong, nonatomic) UISearchBar *searchBar;
+
 @property (nonatomic) BOOL itemsAnimated;
 
 @end
@@ -52,6 +54,14 @@ static NSString * const reuseIdentifier = @"IconCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+//    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-65, 15)];
+//    self.searchBar.placeholder = @"Search for an icon";
+//    
+//    UIBarButtonItem *searchBarItem = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
+//    self.navigationItem.rightBarButtonItem = searchBarItem;
+    
+    self.title = @"Glyphish Tester";
+    
     [self initializeTabBar];
     [self initializeCollectionView];
 }
@@ -77,7 +87,7 @@ static NSString * const reuseIdentifier = @"IconCell";
     
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-49.5) collectionViewLayout:flowLayout];
     self.collectionView.contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.size.height+self.tabBar.frame.size.height+20, 0, 0, 0);
-    self.collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.scrollsToTop = YES;
     self.collectionView.delegate = self;
@@ -134,7 +144,7 @@ static NSString * const reuseIdentifier = @"IconCell";
     if (self.tabBar.items.count > 0) {
         self.beginningItem = [self.tabBar itemAtPoint:location];
         UITabBarItem *tabBarItem = self.tabBar.items[self.beginningItem];
-        [self setUpIconOverlay:tabBarItem.image tabBar:YES center:location];
+        [self setUpIconOverlay:tabBarItem.image indexPath:nil tabBar:YES center:location];
     }
 }
 
@@ -206,7 +216,7 @@ static NSString * const reuseIdentifier = @"IconCell";
     GGIconCollectionViewCell *cell = (GGIconCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:selectedItem];
     
     if (cell.imageView.image != nil) {
-        [self setUpIconOverlay:cell.imageView.image tabBar:NO center:[gesture locationInView:self.collectionViewOverlay]];
+        [self setUpIconOverlay:cell.imageView.image indexPath:selectedItem tabBar:NO center:[gesture locationInView:self.collectionViewOverlay]];
     }
 }
 
@@ -222,9 +232,13 @@ static NSString * const reuseIdentifier = @"IconCell";
     
     NSMutableArray *items = [self.tabBar.items mutableCopy];
     
-    UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"Title" image:[UIImage imageWithCGImage:[self.iconOverlay.image CGImage]
-                                                                                                scale:3.0
-                                                                                          orientation:UIImageOrientationUp] tag:0];
+    NSArray *components = [[self currentSet][self.iconOverlay.tag][@"name"] componentsSeparatedByString:@"_"];
+    NSInteger selectedSet = self.selectedSet == 0 ? 8 : self.selectedSet;
+    
+    UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:[NSString stringWithFormat:@"%ld-%@",(long)selectedSet,components[0]]
+                                                       image:[UIImage imageWithCGImage:[self.iconOverlay.image CGImage]
+                                                                                 scale:3.0
+                                                                           orientation:UIImageOrientationUp] tag:0];
     if (self.tabBar.items.count == 0) {
         items = [NSMutableArray arrayWithObject:item];
     }
@@ -259,11 +273,11 @@ static NSString * const reuseIdentifier = @"IconCell";
 
 - (void)moveIconOverlay:(CGPoint)newCenter {
     if (self.iconOverlay) {
-        [self setUpIconOverlay:nil tabBar:NO center:newCenter];
+        [self setUpIconOverlay:nil indexPath:nil tabBar:NO center:newCenter];
     }
 }
 
-- (void)setUpIconOverlay:(UIImage *)image tabBar:(BOOL)tabBar center:(CGPoint)center {
+- (void)setUpIconOverlay:(UIImage *)image indexPath:(NSIndexPath *)indexPath tabBar:(BOOL)tabBar center:(CGPoint)center {
     UIColor *iconColor;
     if (!tabBar) {
         iconColor = self.selectedColor ? self.selectedColor : GG_DEFAULT_COLOR;
@@ -274,6 +288,7 @@ static NSString * const reuseIdentifier = @"IconCell";
         self.iconOverlay = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
         self.iconOverlay.contentMode = UIViewContentModeScaleAspectFit;
         self.iconOverlay.alpha = 0;
+        self.iconOverlay.tag = indexPath.row;
         
         self.iconOverlay.image = [UIImage maskedImage:image color:iconColor];
         

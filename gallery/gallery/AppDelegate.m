@@ -27,6 +27,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+//    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.161 green:0.180 blue:0.200 alpha:1.00]];
     
     self.statusBarUnderlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.bounds.size.width, 20)];
     self.statusBarUnderlay.backgroundColor = [UIColor blackColor];
@@ -36,9 +37,8 @@
     menuController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
     
     UIBarButtonItem *anchorRightButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings-icon"] style:UIBarButtonItemStyleDone target:self action:@selector(anchorRight)];
-    topViewController.navigationItem.title = @"Glyphish Gallery";
     topViewController.navigationItem.leftBarButtonItem  = anchorRightButton;
-    topViewController.view.backgroundColor = [UIColor whiteColor];
+    topViewController.view.backgroundColor = [UIColor whiteColor]; // need this line for proper height of content
     
     UIGestureRecognizer *resetTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resetTopViewAnimated)];
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:topViewController];
