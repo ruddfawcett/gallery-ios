@@ -14,7 +14,7 @@
 #import "GGMenuViewController.h"
 #import "GGColorPickerTableViewCell.h"
 
-@interface GGBrowserViewController () <GGSetSelectionDelegate, GGColorPickerDelegate>
+@interface GGBrowserViewController () <GGSetSelectionDelegate, GGColorPickerDelegate, GGBarSelectionDelegate>
 
 @property (nonatomic) NSInteger selectedSet;
 @property (strong, nonatomic) UIColor *selectedColor;
@@ -22,7 +22,12 @@
 @property (strong, nonatomic) UICollectionView *collectionView;
 
 @property (strong, nonatomic) UITabBar *tabBar;
+@property (strong, nonatomic) UITabBarItem *temporaryItem;
+@property (strong, nonatomic) UITabBarItem *filler;
+@property (strong, nonatomic) UITabBarItem *shift;
 
+@property (strong, nonatomic) UIView *glow;
+@property (strong, nonatomic) UIView *itemGlow;
 @property (strong, nonatomic) UIView *tabBarOverlay;
 @property (strong, nonatomic) UIView *collectionViewOverlay;
 @property (strong, nonatomic) UIImageView *iconOverlay;
@@ -44,6 +49,7 @@ static NSString * const reuseIdentifier = @"IconCell";
     if (self = [super init]) {
         [GGMenuViewController sharedMenu].glyphishSetDelegate = self;
         [GGMenuViewController sharedMenu].glyphishColorDelegate = self;
+        [GGMenuViewController sharedMenu].glyphishBarDelegate = self;
         
         self.itemsAnimated = YES;
     }
@@ -53,7 +59,7 @@ static NSString * const reuseIdentifier = @"IconCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
 //    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-65, 15)];
 //    self.searchBar.placeholder = @"Search for an icon";
 //    
@@ -64,6 +70,19 @@ static NSString * const reuseIdentifier = @"IconCell";
     
     [self initializeTabBar];
     [self initializeCollectionView];
+    
+//    NSMutableArray *test = [NSMutableArray array];
+//    
+//    for (int i; i <= 5; i++) {
+//        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@""
+//                                                           image:[UIImage imageWithCGImage:[[UIImage imageFromArchivedString:[self currentSet][i][@"archive"]] CGImage]
+//                                                                                     scale:3.0
+//                                                                               orientation:UIImageOrientationUp] tag:0];
+//        
+//        [test addObject:item];
+//    }
+//    
+//    [self.tabBar setItems:test animated:NO];
 }
 
 - (void)initializeTabBar {
@@ -137,6 +156,8 @@ static NSString * const reuseIdentifier = @"IconCell";
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint location = [touch locationInView:self.view];
     
+    [self addOverlay];
+    
     if (self.tabBar.items.count == 0 || ![touch.view isEqual:self.tabBarOverlay] || !CGRectContainsPoint(self.tabBarOverlay.frame, location)) {
         return;
     }
@@ -144,7 +165,15 @@ static NSString * const reuseIdentifier = @"IconCell";
     if (self.tabBar.items.count > 0) {
         self.beginningItem = [self.tabBar itemAtPoint:location];
         UITabBarItem *tabBarItem = self.tabBar.items[self.beginningItem];
+        self.temporaryItem = tabBarItem;
         [self setUpIconOverlay:tabBarItem.image indexPath:nil tabBar:YES center:location];
+        
+        self.shift = [[UITabBarItem alloc] initWithTitle:nil image:nil selectedImage:nil];
+        
+        NSMutableArray *items = [self.tabBar.items mutableCopy];
+        [items replaceObjectAtIndex:self.beginningItem withObject:self.shift];
+        
+        [self.tabBar setItems:items animated:self.itemsAnimated];
     }
 }
 
@@ -152,10 +181,44 @@ static NSString * const reuseIdentifier = @"IconCell";
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint location = [touch locationInView:self.view];
     
+    NSInteger currentItem = [self.tabBar itemAtPoint:location];
+    
+    NSMutableArray *items = [self.tabBar.items mutableCopy];
+    [items removeObject:self.shift];
+    [items insertObject:self.shift atIndex:currentItem];
+    
+    if (!CGRectContainsPoint(self.tabBarOverlay.frame, location)) {
+        [items removeObject:self.shift];
+    }
+    
+    [self.tabBar setItems:items animated:self.itemsAnimated];
+    
     [self moveIconOverlay:location];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint location = [touch locationInView:self.view];
+    
+    self.endItem = [self.tabBar itemAtPoint:location];
+    
+    NSMutableArray *items = [self.tabBar.items mutableCopy];
+    
+    if (self.endItem != self.beginningItem) {
+        if (self.tabBar.items.count != 0) {
+            if (self.temporaryItem != nil) {
+                [items replaceObjectAtIndex:[self.tabBar.items indexOfObject:self.shift] withObject:self.temporaryItem];
+            }
+        }
+        
+        [self.tabBar setItems:items animated:NO];
+    }
+    else {
+        
+        [items replaceObjectAtIndex:self.beginningItem withObject:self.temporaryItem];
+        
+        [self.tabBar setItems:items animated:NO];
+    }
     [self removeOverlay];
 }
 
@@ -169,10 +232,11 @@ static NSString * const reuseIdentifier = @"IconCell";
         return;
     }
     
+    
     if (!CGRectContainsPoint(self.tabBarOverlay.frame, location)) {
         NSMutableArray *items = [self.tabBar.items mutableCopy];
         
-        [items removeObjectAtIndex:self.beginningItem];
+        [items removeObject:self.temporaryItem];
         
         [self.tabBar setItems:items animated:self.itemsAnimated];
         
@@ -181,14 +245,22 @@ static NSString * const reuseIdentifier = @"IconCell";
     
     self.endItem = [self.tabBar itemAtPoint:location];
     
+    NSMutableArray *items = [self.tabBar.items mutableCopy];
+    
     if (self.endItem != self.beginningItem) {
-        NSMutableArray *items = [self.tabBar.items mutableCopy];
-
         if (self.tabBar.items.count != 0) {
-            [items exchangeObjectAtIndex:self.beginningItem withObjectAtIndex:self.endItem];
+            if (self.temporaryItem != nil) {
+                [items replaceObjectAtIndex:[self.tabBar.items indexOfObject:self.shift] withObject:self.temporaryItem];
+            }
         }
-            
-        [self.tabBar setItems:items animated:self.itemsAnimated];
+        
+        [self.tabBar setItems:items animated:NO];
+    }
+    else {
+        
+        [items replaceObjectAtIndex:self.beginningItem withObject:self.temporaryItem];
+        
+        [self.tabBar setItems:items animated:NO];
     }
 }
 
@@ -199,7 +271,7 @@ static NSString * const reuseIdentifier = @"IconCell";
         [self longPressBegan:gesture];
     }
     else if (gesture.state == UIGestureRecognizerStateChanged) {
-        [self moveIconOverlay:[gesture locationInView:self.collectionViewOverlay]];
+        [self longPressMoved:gesture];
     }
     else if (gesture.state == UIGestureRecognizerStateEnded) {
         [self longPressEnded:gesture];
@@ -207,6 +279,8 @@ static NSString * const reuseIdentifier = @"IconCell";
 }
 
 - (void)longPressBegan:(UILongPressGestureRecognizer *)gesture {
+    self.filler = [[UITabBarItem alloc] initWithTitle:nil image:nil selectedImage:nil];
+    
     CGPoint location = [gesture locationInView:self.collectionView];
     
     [self addOverlay];
@@ -220,17 +294,58 @@ static NSString * const reuseIdentifier = @"IconCell";
     }
 }
 
+- (void)longPressMoved:(UILongPressGestureRecognizer *)gesture {
+    CGPoint location = [gesture locationInView:self.collectionViewOverlay];
+    NSMutableArray *items = [self.tabBar.items mutableCopy];
+    
+    NSInteger currentItem = [self.tabBar itemAtPoint:location];
+    
+    if (self.tabBar.items.count < 5 || [self.tabBar.items containsObject:self.filler]) {
+        [items removeObject:self.filler];
+        [items insertObject:self.filler atIndex:currentItem];
+    }
+    
+    if (self.tabBar.items.count == 5 && ![self.tabBar.items containsObject:self.filler]) {
+        [self.itemGlow removeFromSuperview];
+        [self.glow removeFromSuperview];
+        
+        if (CGRectContainsPoint(self.tabBarOverlay.frame, location)) {
+            self.itemGlow = [[UIView alloc] initWithFrame:[self.tabBar frameForItem:currentItem]];
+            
+            self.glow = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+            self.glow.layer.cornerRadius = self.glow.frame.size.width/2;
+            self.glow.backgroundColor = [UIColor whiteColor];
+            self.glow.alpha = 0.6;
+            self.glow.center = self.itemGlow.center;
+            
+            [self.tabBarOverlay addSubview:self.glow];
+            [self.tabBarOverlay addSubview:self.itemGlow];
+        }
+    }
+    
+    if (!CGRectContainsPoint(self.tabBarOverlay.frame, location)) {
+        [items removeObject:self.filler];
+    }
+    
+    [self.tabBar setItems:items animated:self.itemsAnimated];
+    [self moveIconOverlay:location];
+}
+
 - (void)longPressEnded:(UILongPressGestureRecognizer *)gesture {
     CGPoint location = [gesture locationInView:self.collectionViewOverlay];
     
+    NSMutableArray *items = [self.tabBar.items mutableCopy];
+    
     if (!CGRectContainsPoint(self.tabBarOverlay.frame, location)) {
+        [items removeObject:self.filler];
+        
+        [self.tabBar setItems:items animated:YES];
+        
         [self removeOverlay];
         return;
     }
     
     self.endItem = [self.tabBar itemAtPoint:location];
-    
-    NSMutableArray *items = [self.tabBar.items mutableCopy];
     
     NSArray *components = [[self currentSet][self.iconOverlay.tag][@"name"] componentsSeparatedByString:@"_"];
     NSInteger selectedSet = self.selectedSet == 0 ? 8 : self.selectedSet;
@@ -241,15 +356,16 @@ static NSString * const reuseIdentifier = @"IconCell";
                                                                            orientation:UIImageOrientationUp] tag:0];
     if (self.tabBar.items.count == 0) {
         items = [NSMutableArray arrayWithObject:item];
+        [self.tabBar setItems:items animated:self.itemsAnimated];
     }
     else if (self.tabBar.items.count < 5) {
-        [items insertObject:item atIndex:self.endItem+1];
+        [items replaceObjectAtIndex:[self.tabBar.items indexOfObject:self.filler] withObject:item];
+        [self.tabBar setItems:items animated:NO];
     }
     else {
         [items replaceObjectAtIndex:self.endItem withObject:item];
+        [self.tabBar setItems:items animated:NO];
     }
-    
-    [self.tabBar setItems:items animated:self.itemsAnimated];
     
     [self removeOverlay];
 }
@@ -257,16 +373,35 @@ static NSString * const reuseIdentifier = @"IconCell";
 #pragma mark - Collection View Overlay Management
 
 - (void)addOverlay {
-    self.collectionViewOverlay = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    self.collectionViewOverlay = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.collectionViewOverlay = [[UIView alloc] initWithFrame:self.collectionView.frame];
+    self.collectionViewOverlay.backgroundColor = [UIColor blackColor];
+    self.collectionViewOverlay.alpha = 0;
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        self.collectionViewOverlay.alpha = 0.8;
+    }];
+    
     [self.navigationController.view addSubview:self.collectionViewOverlay];
 }
 
 - (void)removeOverlay {
-    [self.collectionViewOverlay removeFromSuperview];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.collectionViewOverlay.alpha = 0;
+    }];
+    
     self.collectionViewOverlay = nil;
     
     [self.iconOverlay removeFromSuperview];
     self.iconOverlay = nil;
+    
+    [self.itemGlow removeFromSuperview];
+    self.itemGlow = nil;
+    
+    [self.glow removeFromSuperview];
+    self.glow = nil;
+    
+    self.filler = nil;
 }
 
 #pragma mark - Icon Overlay Management
@@ -292,7 +427,7 @@ static NSString * const reuseIdentifier = @"IconCell";
         
         self.iconOverlay.image = [UIImage maskedImage:image color:iconColor];
         
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             self.iconOverlay.alpha = 1;
         }];
     }

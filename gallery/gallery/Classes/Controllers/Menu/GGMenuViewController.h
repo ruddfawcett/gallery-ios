@@ -24,8 +24,18 @@ typedef NS_ENUM(NSUInteger, GGMenuSections) {
     GGSectionCount
 };
 
+typedef NS_ENUM(NSUInteger, GGBarTypes) {
+    GGBarTypeTabBar,
+    GGBarTypeNavigation
+};
 
 @class GGMenuViewController;
+
+@protocol GGBarSelectionDelegate <NSObject>
+
+- (void)didSelectBar:(GGBarTypes)barType;
+
+@end
 
 @protocol GGSetSelectionDelegate <NSObject>
 
@@ -43,6 +53,7 @@ typedef NS_ENUM(NSUInteger, GGMenuSections) {
 
 + (instancetype)sharedMenu;
 
+@property (weak, nonatomic) id<GGBarSelectionDelegate> glyphishBarDelegate;
 @property (weak, nonatomic) id<GGSetSelectionDelegate> glyphishSetDelegate;
 @property (weak, nonatomic) id<GGColorPickerDelegate> glyphishColorDelegate;
 

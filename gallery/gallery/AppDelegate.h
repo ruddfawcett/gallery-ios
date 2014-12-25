@@ -14,6 +14,10 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
++ (AppDelegate *)sharedDelegate;
+
+- (float)reveal;
+
 @property (nonatomic, strong) ECSlidingViewController *slidingViewController;
 
 @property (strong, nonatomic) UIWindow *window;

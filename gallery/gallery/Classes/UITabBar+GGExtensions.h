@@ -11,5 +11,6 @@
 @interface UITabBar (GGExtensions)
 
 - (NSInteger)itemAtPoint:(CGPoint)point;
+- (CGRect)frameForItem:(NSUInteger)index;
 
 @end

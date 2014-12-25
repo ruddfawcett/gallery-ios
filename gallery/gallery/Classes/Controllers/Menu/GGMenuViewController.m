@@ -62,10 +62,12 @@
     self.tableView.showsVerticalScrollIndicator = NO;
 }
 
+- (float)width {
+    return self.view.bounds.size.width-[[AppDelegate sharedDelegate] reveal];
+}
+
 - (void)setUpTableView {
-    float width = self.view.bounds.size.width > 414 ? self.view.bounds.size.width-(self.view.bounds.size.width*(.140625*4)) : self.view.bounds.size.width-(self.view.bounds.size.width*(.140625*2));
-    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 70, width, self.view.bounds.size.height-70) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 70, [self width], self.view.bounds.size.height-70) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -80,8 +82,7 @@
 }
 
 - (UIView *)tableHeaderView {
-    float width = self.view.bounds.size.width > 414 ? self.view.bounds.size.width-(self.view.bounds.size.width*(.140625*4)) : self.view.bounds.size.width-(self.view.bounds.size.width*(.140625*2));
-    UIView *background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 70)];
+    UIView *background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self width], 70)];
     background.backgroundColor = [UIColor colorWithRed:0.161 green:0.180 blue:0.200 alpha:1.00];
     
     UIView *statusBarUnderlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, background.bounds.size.width, 25)];
@@ -99,8 +100,7 @@
 }
 
 - (UIView *)tableFooterView {
-    float width = self.view.bounds.size.width > 414 ? self.view.bounds.size.width-(self.view.bounds.size.width*(.140625*4)) : self.view.bounds.size.width-(self.view.bounds.size.width*(.140625*2));
-    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 100)];
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self width], 100)];
     
     NSInteger offset = ((GGSectionCount * 48) + 48 * GGSetCount) > self.view.bounds.size.height ?  100 : self.view.bounds.size.height - ((GGSectionCount * 48) + 48 * GGSetCount);
     
@@ -169,6 +169,7 @@
         cell = [GGColorPickerTableViewCell cellWithReuseIdentifier:@"Color"];
         cell.textLabel.text = self.contents[indexPath.section][indexPath.row];
         
+//        cell.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" Hex" attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
         cell.textField.text = self.colorHex ? self.colorHex : @"";
         cell.color.backgroundColor = self.selectedColor ? self.selectedColor : [UIColor colorWithRed:0.000 green:0.690 blue:1.000 alpha:1.00];
         
@@ -240,6 +241,12 @@
                 [cell setOn:YES color:[UIColor colorWithRed:0.929 green:0.286 blue:0.349 alpha:1.00]];
             }
         }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.glyphishBarDelegate && [self.glyphishBarDelegate respondsToSelector:@selector(didSelectBar:)]) {
+                [self.glyphishBarDelegate didSelectBar:indexPath.row];
+            }
+        });
         
         self.selectedBar = indexPath;
     }
