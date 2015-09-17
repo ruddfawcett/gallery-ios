@@ -10,7 +10,6 @@
 		DBF70F03B2BA8852A17FEEAD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 714068E979A98E22912229D9 /* libPods.a */; };
 		F1092F111A43E02200B506BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F101A43E02200B506BB /* main.m */; };
 		F1092F141A43E02200B506BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F131A43E02200B506BB /* AppDelegate.m */; };
-		F1092F171A43E02200B506BB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F161A43E02200B506BB /* ViewController.m */; };
 		F1092F1C1A43E02200B506BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1092F1B1A43E02200B506BB /* Images.xcassets */; };
 		F1092F1F1A43E02200B506BB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1092F1D1A43E02200B506BB /* LaunchScreen.xib */; };
 		F1092F2B1A43E02300B506BB /* galleryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1092F2A1A43E02300B506BB /* galleryTests.m */; };
@@ -45,8 +44,6 @@
 		F1092F101A43E02200B506BB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F1092F121A43E02200B506BB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F1092F131A43E02200B506BB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F1092F151A43E02200B506BB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		F1092F161A43E02200B506BB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F1092F1B1A43E02200B506BB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F1092F1E1A43E02200B506BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		F1092F241A43E02200B506BB /* galleryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = galleryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,8 +135,6 @@
 				F1092F121A43E02200B506BB /* AppDelegate.h */,
 				F1092F131A43E02200B506BB /* AppDelegate.m */,
 				F1092F371A43E88E00B506BB /* Classes */,
-				F1092F151A43E02200B506BB /* ViewController.h */,
-				F1092F161A43E02200B506BB /* ViewController.m */,
 				F1092F1B1A43E02200B506BB /* Images.xcassets */,
 				F1092F1D1A43E02200B506BB /* LaunchScreen.xib */,
 				F1092F0E1A43E02200B506BB /* Supporting Files */,
@@ -380,7 +375,6 @@
 				F170AF371A44F59F0051B5B2 /* UIImage+String.m in Sources */,
 				F1B7B4241A46A7C400DDA92A /* UITabBar+GGExtensions.m in Sources */,
 				F170AF3E1A44F5F60051B5B2 /* GGIconArchive.m in Sources */,
-				F1092F171A43E02200B506BB /* ViewController.m in Sources */,
 				F1092F141A43E02200B506BB /* AppDelegate.m in Sources */,
 				F170AF471A44FBDF0051B5B2 /* GGIconCollectionViewCell.m in Sources */,
 				F1092F3F1A4489B300B506BB /* GGRadioButtonTableViewCell.m in Sources */,

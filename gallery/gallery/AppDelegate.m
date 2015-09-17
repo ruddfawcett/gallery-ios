@@ -42,7 +42,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-//    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.161 green:0.180 blue:0.200 alpha:1.00]];
     
     self.statusBarUnderlay = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.bounds.size.width, 20)];
     self.statusBarUnderlay.backgroundColor = [UIColor blackColor];

@@ -462,4 +462,8 @@ static NSString * const reuseIdentifier = @"IconCell";
     [self.collectionView setContentOffset:CGPointMake(-self.collectionView.contentInset.left, -self.collectionView.contentInset.top) animated:YES];
 }
 
+- (void)didSelectBar:(GGBarTypes)barType {
+    
+}
+
 @end

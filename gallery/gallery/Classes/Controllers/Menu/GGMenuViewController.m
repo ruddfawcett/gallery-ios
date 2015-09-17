@@ -168,8 +168,6 @@
         GGColorPickerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Color"];
         cell = [GGColorPickerTableViewCell cellWithReuseIdentifier:@"Color"];
         cell.textLabel.text = self.contents[indexPath.section][indexPath.row];
-        
-//        cell.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" Hex" attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
         cell.textField.text = self.colorHex ? self.colorHex : @"";
         cell.color.backgroundColor = self.selectedColor ? self.selectedColor : [UIColor colorWithRed:0.000 green:0.690 blue:1.000 alpha:1.00];
         
@@ -217,6 +215,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GGRadioButtonTableViewCell *cell = (GGRadioButtonTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    
+    // HACK: For some reason the other approach of using a NSIndexPath property didn't work on the iPhone 4, so I'm doing it this way.
     
     if (indexPath.section == GGMenuSectionBar) {
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
